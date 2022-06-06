@@ -8,6 +8,7 @@ target 'CalendarTestOne' do
   # Pods for CalendarTestOne
 
   pod 'FSCalendar'
+  pod 'RealmSwift'
 
   target 'CalendarTestOneTests' do
     inherit! :search_paths
