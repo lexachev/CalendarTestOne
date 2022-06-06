@@ -1,5 +1,5 @@
 //
-//  AlertDate.swift
+//  AlertTime.swift
 //  CalendarTestOne
 //
 //  Created by Алексей Каллистов on 06.06.2022.
@@ -9,24 +9,25 @@ import UIKit
 
 extension UIViewController {
 
-    func alertDate(label: UILabel, completionHanger: @escaping (NSDate) -> Void) {
+    func alertTime(label: UILabel, completionHanger: @escaping (Date) -> Void) {
         let alert = UIAlertController(title: "", message: nil, preferredStyle: .actionSheet)
         let datePicker = UIDatePicker()
-        datePicker.datePickerMode = .date
+        datePicker.datePickerMode = .time
         datePicker.preferredDatePickerStyle = .wheels
+        datePicker.locale = NSLocale(localeIdentifier: "Ru.ru") as Locale
 
         alert.view.addSubview(datePicker)
 
         let ok = UIAlertAction(title: "Ok", style: .default) { (_) in
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd.MM.yyyy"
-            let dateStr = dateFormatter.string(from: datePicker.date)
-            let date = datePicker.date as NSDate
-            completionHanger(date)
+            dateFormatter.dateFormat = "HH:mm"
+            let timeStr = dateFormatter.string(from: datePicker.date)
+            let time = datePicker.date as Date
+            completionHanger(time)
 
-            label.text = dateStr
+            label.text = timeStr
         }
-        
+
         let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
 
         alert.addAction(ok)

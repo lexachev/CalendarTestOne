@@ -10,9 +10,9 @@ import UIKit
 
 class ScheduleTableViewCell: UITableViewCell {
 
-    let nameDeal: UILabel = UILabel(text: "Дело №1", font: .avenirNext20(), alignment: .right)
-    let timeDeal: UILabel = UILabel(text: "13:00 - 14:00", font: .avenirNext20())
-    let descriptionDeal: UILabel = UILabel(text: "Описание дела", font: .avenirNext14())
+    let nameDeal: UILabel = UILabel(text: "", font: .avenirNext20(), alignment: .right)
+    let timeDeal: UILabel = UILabel(text: "", font: .avenirNext20())
+    let descriptionDeal: UILabel = UILabel(text: "", font: .avenirNext14())
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -22,6 +22,12 @@ class ScheduleTableViewCell: UITableViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func configure(model: ScheduleModel) {
+        nameDeal.text = model.name
+        timeDeal.text = "\(model.dateStart) - \(model.dateFinish)"
+        descriptionDeal.text = model.descriptionDeal
     }
 
     func setConstraints() {

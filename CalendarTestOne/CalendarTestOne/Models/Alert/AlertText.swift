@@ -8,14 +8,15 @@
 import UIKit
 
 extension UIViewController {
-    func alertText(label: UILabel, name: String, placeholder: String) {
+    func alertText(label: UILabel, name: String, placeholder: String, completionHanger: @escaping (String) -> Void) {
 
         let alert = UIAlertController(title: name, message: nil, preferredStyle: .alert)
 
         let ok = UIAlertAction(title: "Ok", style: .default) { (_) in
             let tfAlert = alert.textFields?.first
             guard let text = tfAlert?.text else { return }
-            label.text = text
+            label.text = (text != "" ? text : label.text)
+            completionHanger(text)
         }
 
         alert.addTextField { (tfAlert) in
@@ -26,7 +27,7 @@ extension UIViewController {
 
         alert.addAction(ok)
         alert.addAction(cancel)
-        
+
         present(alert, animated: true, completion: nil)
     }
 }
